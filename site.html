@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PickVenue | Premium Birthday Venues</title>
+    <meta name="description" content="Book exclusive venues for unforgettable birthday celebrations.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">PickVenue</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Your Celebration <span class="highlight"> Starts Here</span></h1>
+            <p class="hero-subtitle">Compare spaces, check availability, and secure your venue instantly, no calls, no
+                hassle.</p>
+
+            <!-- Booking Form Moved Here -->
+            <form class="hero-form"
+                action = "https://docs.google.com/forms/d/e/1FAIpQLSfrsSnJJ46E7PXuaDpxp0ZiJfrJ8Jgqa16QDRmysbikCno11g/formResponse"
+                method="POST"
+                target="hidden_iframe"
+                onsubmit="return handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" name="entry.831785636" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name = "entry.854709434" placeholder="Email Address" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Lock Your Spot</button>
+            </form>
+            <p class="interest-text"><span id="interest-counter" class="counter-number">0</span>+ already interested,
+                don't miss out!!</p>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Premium Services</h2>
+                <p>Everything you need for a perfect celebration.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">🏛️</div>
+                    <h3>Discover Premium Venues</h3>
+                    <p>Explore a curated selection of the city's finest birthday venues.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🌐</div>
+                    <h3>Seamless Booking Experience</h3>
+                    <p>Book your dream venue instantly with our hassle-free process.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🎵</div>
+                    <h3>Tailored Celebrations</h3>
+                    <p>Customized recommendations to match your unique style and preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2024 PickVenue. All rights reserved.</p>
+            <div class="social-links">
+               
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const counter = document.getElementById('interest-counter');
+            const target = 1928;
+            const duration = 2000; // 2 seconds
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current);
+                }
+            }, stepTime);
+        });
+    </script>
+    <script>
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const form = event.target;
+
+        // submit form silently
+        form.submit();
+
+        // show toast
+        showToast("You're on the list 🚀");
+
+        // reset form
+        form.reset();
+    }
+
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.textContent = message;
+        toast.style.position = "fixed";
+        toast.style.bottom = "30px";
+        toast.style.left = "50%";
+        toast.style.transform = "translateX(-50%)";
+        toast.style.background = "#111";
+        toast.style.color = "#fff";
+        toast.style.padding = "12px 20px";
+        toast.style.borderRadius = "8px";
+        toast.style.fontSize = "14px";
+        toast.style.zIndex = "9999";
+        toast.style.opacity = "0";
+        toast.style.transition = "opacity 0.3s ease";
+
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => toast.style.opacity = "1");
+
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+    </script>
+</body>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+</html>
